@@ -32,6 +32,17 @@ public class AirportService {
 	@Value("${airports.url}")
 	private String airport_uri;
 	
+	@Value("${token.url}")
+	private String uri;
+	
+	@Value("${token.username}")
+	private String username;
+	
+	@Value("${token.password}")
+	private String password;
+	
+	@Value("${grant.type}")
+	private String grantType;
 	
 	AccessTokenHelper tokenHelper;
 	
@@ -41,7 +52,7 @@ public class AirportService {
 public List<Location> getAirportList(){
 		
 		tokenHelper = new AccessTokenHelper();
-		AccessTokenResponse accessToken = tokenHelper.obtainAccessToken();
+		AccessTokenResponse accessToken = tokenHelper.obtainAccessToken(uri,username,password,grantType);
 		
 		List<Location> airports = retrieveAirportList( accessToken);
 		return airports;

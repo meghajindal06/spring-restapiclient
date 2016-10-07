@@ -25,12 +25,30 @@ public class SelectionDetailService {
 	@Value("${airportbase.url}")
 	private String airportbase_uri;
 	
+	@Value("${fare.url}")
+	private String fare_uri;
+	
+	
+	
+	@Value("${token.url}")
+	private String uri;
+	
+	@Value("${token.username}")
+	private String username;
+	
+	@Value("${token.password}")
+	private String password;
+	
+	@Value("${grant.type}")
+	private String grantType;
+	
+	
 	
 	private final String SLASH = "/";
 	
 	public SelectionDetail getJourneyDetails(String originCode , String destinationCode) {
 		tokenHelper = new AccessTokenHelper();
-		AccessTokenResponse accessToken = tokenHelper.obtainAccessToken();
+		AccessTokenResponse accessToken = tokenHelper.obtainAccessToken(uri,username,password,grantType);
 		
 		SelectionDetail detail = retrieveAndPopulateJourneyDetails(originCode, destinationCode, accessToken);
 		return detail;
@@ -50,7 +68,7 @@ public class SelectionDetailService {
 		    ListenableFuture<ResponseEntity<Location>> future2 = oAuthRestTemplate
 		        .getForEntity(airportbase_uri+ destinationCode, Location.class);
 		    ListenableFuture<ResponseEntity<Fare>> future3 = oAuthRestTemplate
-		        .getForEntity(airportbase_uri+ originCode + SLASH + destinationCode, Fare.class);
+		        .getForEntity(fare_uri+ originCode + SLASH + destinationCode, Fare.class);
 
 		    ResponseEntity<Location> response1 = future1.get();
 		    ResponseEntity<Location> response2 = future2.get();

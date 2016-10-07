@@ -7,7 +7,8 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
 
-@Component/**
+@Component
+/**
  * responsible for obtaining oauth2 token
  * @author megha
  *
@@ -15,17 +16,7 @@ import org.springframework.util.MultiValueMap;
 
 public class AccessTokenHelper {
 
-	@Value("${token.url}")
-	private String uri;
 	
-	@Value("${token.username}")
-	private String username;
-	
-	@Value("${token.password}")
-	private String password;
-	
-	@Value("${grant.type}")
-	private String grantType;
 	
 	private static final String GRANT_TYPE = "grant_type";
 	
@@ -33,15 +24,19 @@ public class AccessTokenHelper {
 	
 	/**
 	 * obtain access token for token service of mock api
+	 * @param grantType 
+	 * @param password 
+	 * @param username 
+	 * @param uri 
 	 * @return
 	 */
-	public  AccessTokenResponse obtainAccessToken(){
+	public  AccessTokenResponse obtainAccessToken(String uri, String username, String password, String grantType){
 		restTemplate = new BasicAuthRestTemplate();
 		MultiValueMap<String, String> form = new LinkedMultiValueMap<String, String>();
 		form.set(GRANT_TYPE, grantType);
 		
 		restTemplate.addAuthentication(username, password);
-		
+		System.out.println(uri);
 		
 		ResponseEntity<AccessTokenResponse> response =  restTemplate.postForEntity(uri, form, AccessTokenResponse.class);
 		return response.getBody();
