@@ -49,7 +49,7 @@ public class AirportService {
 	OAuth2RestTemplate oAuthRestTemplate;
 	
 	
-public List<Location> getAirportList(){
+public List<Location> getAirportList(){ 
 		
 		tokenHelper = new AccessTokenHelper();
 		AccessTokenResponse accessToken = tokenHelper.obtainAccessToken(uri,username,password,grantType);

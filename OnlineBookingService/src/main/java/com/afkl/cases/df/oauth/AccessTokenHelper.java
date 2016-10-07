@@ -28,7 +28,7 @@ public class AccessTokenHelper {
 	 * @param password 
 	 * @param username 
 	 * @param uri 
-	 * @return
+	 * @return 
 	 */
 	public  AccessTokenResponse obtainAccessToken(String uri, String username, String password, String grantType){
 		restTemplate = new BasicAuthRestTemplate();
