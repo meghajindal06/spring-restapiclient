@@ -70,6 +70,7 @@ public class SelectionDetailService {
 		    ListenableFuture<ResponseEntity<Fare>> future3 = oAuthRestTemplate
 		        .getForEntity(fare_uri+ originCode + SLASH + destinationCode, Fare.class);
 
+		    
 		    ResponseEntity<Location> response1 = future1.get();
 		    ResponseEntity<Location> response2 = future2.get();
 		    ResponseEntity<Fare> response3 = future3.get();
