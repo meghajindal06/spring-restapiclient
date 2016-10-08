@@ -1,0 +1,28 @@
+<div class="container">
+     <h1>Journey Plan</h1>
+    <form>
+      <div class="form-group">
+        <label for="originCode">Origin</label>
+        <input type="text" class="validate filter-input" [(ngModel)]=origin (keyup)=filter(origin) required>
+      </div>
+      <div class="suggestions" *ngIf="filteredOriginList.length > 0">
+                <ul  >
+                    <li *ngFor="let item of filteredOriginList">
+                        <a (click)="select(item.name , 'origin')">{{item.name}}</a>
+                    </li>
+                </ul>
+            </div>
+      <div class="form-group">
+        <label for="destCode">Destination</label>
+        <input type="text" class="validate filter-input" [(ngModel)]=destCode (keyup)=filterDest(destCode) required>
+      </div>
+      <div class="suggestions" *ngIf="filteredOriginList.length > 0">
+                <ul  >
+                    <li *ngFor="let item of filteredOriginList">
+                        <a (click)="select(item.name , 'destCode')">{{item.name}}</a>
+                    </li>
+                </ul>
+            </div>
+      <button type="submit" class="btn btn-submit">Submit</button>
+    </form>
+</div>
